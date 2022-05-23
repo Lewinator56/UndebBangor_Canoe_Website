@@ -13,7 +13,7 @@ The [REPLACE WITH NAME] should be replaced with the name of teh individual.<br>
 The mailto address should be the university email address of the individual.<br>
 The text within the <a> element for the mailto should be replaced with the university email address of the individual.
 
-A fully completed example of this can be seen in [source.html](source.html)staring at line 589.
+A fully completed example of this can be seen in [source.html](source.html) staring at line 539.
 
 ```html
 <div class="card card-info">
