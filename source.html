@@ -1,0 +1,716 @@
+<!-- external css -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" />
+<link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" rel="stylesheet" />
+<!-- custom css -->
+<style type="text/css">
+  /* import roboto, since its a good font and set up the color scheme variables */
+  @import url('https://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700|Roboto:300,400,500');
+
+  :root {
+    --primary-dark: #212121;
+    --secondary-dark: #003399;
+    --primary-light: #ffffff;
+    --secondary-light: #66CCCC;
+    --header-text: var(--primary-light);
+  }
+
+  #uc-groups-details-page {
+    display: none !important;
+  }
+
+  a {
+    color: var(--secondary-dark) !important;
+  }
+
+  p {
+    font-size: 16px !important;
+  }
+
+  html,
+  body {
+    margin: 0px;
+    background: var(--primary-light);
+    overflow-x: hidden;
+  }
+
+  /* Header */
+  header {
+    width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    position: fixed;
+    transition-duration: 0.4s !important;
+  }
+
+  .header-top {
+    background-color: #ffffff11;
+    margin-top: -500px;
+    /*display: none;*/
+  }
+
+  .header-scrolled {
+    background-color: #ffffffff;
+    box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.5);
+    /*display: inline;*/
+  }
+
+  nav {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    margin-right: 0;
+    text-align: right;
+    z-index: 1000;
+  }
+
+  @media (max-width: 550px) {
+    nav a {
+      width: 90%;
+      flex-flow: column;
+      flex-direction: row;
+      justify-content: center;
+      text-align: right;
+      display: block !important;
+    }
+
+    .title-container {
+      height: auto !important;
+      margin-top: 0px;
+    }
+
+    .logo {
+      max-width: 125px;
+    }
+  }
+
+  /* end */
+  footer {
+    background: var(--primary-dark);
+    height: 200px;
+    box-shadow: 0px -3px 9px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    margin-top: 100px;
+    text-align: center;
+    padding-top: 25px;
+  }
+
+  .cover-image {
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.5);
+  }
+
+  .center-children {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .center-parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    align-content: center;
+  }
+
+  .backdrop-blur {
+    backdrop-filter: blur(5px);
+  }
+
+  /* buttons */
+  .button {
+    font-family: "Roboto", sans-serif;
+    font-size: 30px;
+    border-radius: 5px;
+    padding: 16px 24px;
+    transition-duration: 0.4s;
+    outline: 0px !important;
+    margin: 10px;
+    border: 0px;
+    color: var(--primary-dark);
+    text-decoration: none;
+  }
+
+  .border-button {
+    border: 2px solid var(--primary-light);
+    background-color: transparent;
+    color: var(--primary-light);
+  }
+
+  .raised-button {
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  .border-button:hover {
+    background-color: var(--secondary-light);
+    mix-blend-mode: normal;
+    border: 2px solid var(--secondary-light);
+    color: var(--primary-light)
+  }
+
+  .raised-button:hover {
+    box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.5);
+  }
+
+  .secondary {
+    background-color: var(--secondary-light);
+    color: white;
+  }
+
+  .navbutton {
+    font-size: 24px;
+    font-weight: 400;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .flat {
+    background-color: transparent;
+  }
+
+  .flat:hover {
+    color: #aaaaaa;
+  }
+
+  .ripple {
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .ripple:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform .5s, opacity 1s;
+  }
+
+  .ripple:active:after {
+    transform: scale(0, 0);
+    opacity: .3;
+    transition: 0s;
+  }
+
+  .button-outline {
+    font-family: "Roboto", sans-serif;
+    color: var(--primary-light);
+    outline: 0px !important;
+    padding: 10px;
+    border-radius: 0px;
+    border: 1px solid var(--primary-light);
+    background: transparent;
+    font-size: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    mix-blend-mode: difference;
+    margin-left: 0px;
+  }
+
+  .button-outline:hover {
+    background-color: var(--primary-light);
+    color: #000000;
+    mix-blend-mode: normal;
+  }
+
+  .footer-links {
+    align-content: center;
+    text-align: center;
+    margin: auto;
+    width: auto;
+  }
+
+  .center-icon {
+    display: block;
+    width: auto;
+    font-size: 50px;
+  }
+
+  .email-button {
+    height: 75%;
+    width: 40px;
+    background-color: var(--primary-dark);
+    border-radius: 0px;
+    align-self: flex-end;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    overflow: hidden;
+  }
+
+  /* End */
+  .page-header-container {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .page-header {
+    letter-spacing: 10px;
+    font-size: 60px;
+    font-family: "Roboto", "sans-serif";
+    text-align: center;
+    color: var(--primary-light);
+  }
+
+  .text-border {
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+  }
+
+  .center-everything {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    ;
+  }
+
+  .about-container {
+    background: var(--primary-light)ff;
+    width: 100%;
+    height: auto;
+    margin-top: auto;
+    align-self: flex-end;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .committee-container {
+    background-color: #eeeeee;
+    width: 100%;
+    height: auto;
+    margin-top: auto;
+    align-self: flex-end;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Cards */
+  .card {
+    box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    background-color: var(--primary-light);
+    margin: 10px auto 10px auto;
+    display: inline-block;
+  }
+
+  .sep-50vh {
+    background-position: center;
+    background-size: cover;
+    height: 50vh;
+    flex-direction: column;
+    display: flex;
+  }
+
+  .sep-25vh {
+    background-position: center;
+    background-size: cover;
+    height: 25vh;
+    flex-direction: column;
+    display: flex;
+  }
+
+  .card-header {
+    border-radius: 5px 5px 0px 0px;
+    background-color: #37474f;
+    width: 100%;
+    height: auto;
+    box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+  }
+
+  .about-container {
+    background: var(--primary-light)ff;
+    width: 100%;
+    height: auto;
+    margin-top: auto;
+    align-self: flex-end;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .card-info-link {}
+
+  .card-info-link:hover {
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.5);
+  }
+
+  .card-info {
+    height: auto;
+    margin: 1%;
+    max-height: 600px;
+    width: 30%;
+    min-width: 200px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .card-flat-half {
+    height: auto;
+    margin: 1%;
+    max-height: 600px;
+    width: 48%;
+    min-width: 200px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  @media only screen and (max-device-width: 520px) {
+    .card-flat-half {
+      height: auto;
+      margin: 1%;
+      max-height: 600px;
+      width: 90%;
+      min-width: 200px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .card-info {
+      height: auto;
+      margin: 5%;
+      max-height: 600px;
+      width: 50%;
+      min-width: 200px;
+      text-align: center;
+      overflow: hidden;
+    }
+  }
+
+  .card-info:hover {
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.5);
+  }
+
+  #img-sect .card-info {
+    padding: 0;
+  }
+
+  #img-sect .card {
+    margin: 20px;
+    width: calc(30.3% - 40px);
+  }
+
+  .card-image-extra {
+    border-radius: 5px 5px 0px 0px;
+    width: 124.5%;
+    height: auto;
+    margin: -25px;
+  }
+
+  /* End */
+  /* Text Styles */
+  span {
+    font-family: Roboto;
+    color: var(--primary-dark)
+  }
+
+  .section-head {
+    font-weight: 400;
+    font-size: 20px;
+  }
+
+  .section-content {
+    font-weight: 500;
+    line-height: 25px;
+    font-size: 20px;
+  }
+
+  .text-container {
+    max-width: 25%;
+    margin: 20px auto 20px auto;
+    height: auto;
+  }
+
+  @media (max-width: 800px) {
+    .text-container {
+      max-width: 50%;
+    }
+  }
+
+  .separator-icon {
+    margin: -35px auto auto auto;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    text-align: center;
+  }
+
+  .dark {
+    background: transparent !important;
+    color: var(--primary-dark) !important;
+  }
+
+  .material-icons {
+    vertical-align: middle;
+    position: relative;
+    top: 25%;
+  }
+
+  .footer-text-copyright {
+    color: var(--primary-light);
+    align-self: center;
+    font-weight: 100;
+    font-size: 14px;
+  }
+
+  .card-header-text {
+    letter-spacing: 5px;
+    font-size: 20px;
+  }
+
+  .card-header-icon {
+    font-size: 30px;
+  }
+
+  /* End */
+  .title-container {
+    background-color: #ffffff11;
+    padding: 10px;
+  }
+
+  .header-text {
+    color: var(--header-text);
+    border-color: var(--header-text);
+  }
+</style>
+<!-- -->
+<section class="cover-image center-children" id="home" style="background-image: url(https://nusdigital.s3.amazonaws.com/image/images/359236/original/canoe_padarn.jpeg);">
+  <div class="backdrop-blur cover-image center-children">
+    <div>
+      <!-- Title over cover image -->
+      <div class="page-header-container">
+        <span class="page-header text-border">Bangor University Canoe Club</span>
+      </div>
+    </div>
+    <!-- Navigation buttons below title, link to anchors on the page rather than other pages-->
+    <div class="center-everything ">
+      <button class="button raised-button secondary ripple" onclick="location.href='https://www.undebbangor.com/groups/canoe-canoe-polo/join';">Join Us!</button>
+      <button class="border-button button" onclick="location.href='#about';">Find Out More</button>
+    </div>
+  </div>
+</section>
+<section class="about-container" id="about">
+  <div class="text-container">
+    <span class="card-header-text">ABOUT US</span>
+  </div>
+  <div class="container">
+    <div style="display:flex;flex-direction:row;flex-flow:wrap;justify-content:center;">
+      <!-- a bit of cheating here to resize the image, make sure this text reflects the text in the description column after it! -->
+      <div class="card-flat-half" style="background-image: url(https://nusdigital.s3.amazonaws.com/image/images/359234/original/canoe_lake.jpeg); background-position: center; background-size: cover;">
+        <p style="color: rgba(0,0,0,0);">We are Bangor's canoe and kayak club. Joining BUCC is a great way to get out and explore the beauty of North Wales. As a club we welcome both experienced and new paddlers, we are more than happy to accommodate for the ability of each of our members. We have a wide range of equipment available to use for club activities, so don't worry if you don't have your own. We are out most weekends exploring some of the best white water Wales has to offer, as well as calmer rivers perfect for an introduction to the sport. We run lake sessions most Wednesdays at Llyn Padarn. For those wanting to give the sport a try or practice in warmer conditions, we run pool sessions every Monday evening. Whilst out on the water we have experienced coaches to guide you and help you develop your skills, ensuring you make the most of every trip. For more information follow us on Facebook and Instagram and feel free to contact any of the committee members.</p>
+      </div>
+      <div class="card-flat-half">
+        <p style="text-align: left;">We are Bangor's canoe and kayak club. Joining BUCC is a great way to get out and explore the beauty of North Wales. As a club we welcome both experienced and new paddlers, we are more than happy to accommodate for the ability of each of our members. We have a wide range of equipment available to use for club activities, so don't worry if you don't have your own. We are out most weekends exploring some of the best white water Wales has to offer, as well as calmer rivers perfect for an introduction to the sport. We run lake sessions most Wednesdays at Llyn Padarn. For those wanting to give the sport a try or practice in warmer conditions, we run pool sessions every Monday evening. Whilst out on the water we have experienced coaches to guide you and help you develop your skills, ensuring you make the most of every trip. For more information follow us on Facebook and Instagram and feel free to contact any of the committee members.</p>
+      </div>
+    </div>
+  </div>
+  <div class="text-container">
+    <span></span>
+  </div>
+</section>
+<section class="committee-container">
+  <div class="text-container">
+    <span class="card-header-text">MEET THE COMMITTEE</span>
+  </div>
+  <div class="container">
+    <!-- -->
+    <!-- stuff here is for the committee members, each card is a member profile -->
+    <!-- treat each section as a 'module'-->
+    <!-- -->
+    <div style="display:flex;flex-direction:row;flex-flow:wrap;justify-content:center;">
+      <!-- captain -->
+      <div class="card card-info">
+        <div class="card-image">
+          <img src="https://nusdigital.s3.amazonaws.com/image/images/359584/original/lewis.jpeg" />
+          <span class="card-title">Captain</span>
+        </div>
+        <div class="card-content">
+          <p>Lewis Dixon <br />
+            <a href="mailto:lwd18hvf@bangor.ac.uk">lwd18hvf@bangor.ac.uk</a>
+          </p>
+        </div>
+      </div>
+      <!-- end captain-->
+      <!-- treasurer -->
+      <div class="card card-info">
+        <div class="card-image">
+          <img src="https://nusdigital.s3.amazonaws.com/image/images/359585/original/dilys.jpeg" />
+          <span class="card-title">Treasurer</span>
+        </div>
+        <div class="card-content">
+          <p>Dilys Nichols <br />
+            <a href="mailto:dln18fff@bangor.ac.uk">dln18fff@bangor.ac.uk</a>
+          </p>
+        </div>
+      </div>
+      <!-- end treasurer -->
+      <!-- Secretary -->
+      <div class="card card-info">
+        <div class="card-image">
+          <img src="https://nusdigital.s3.amazonaws.com/image/images/359581/original/conor.jpeg" />
+          <span class="card-title">Secretary</span>
+        </div>
+        <div class="card-content">
+          <p>Conor Matthews <br />
+            <a href="mailto:cnm20xjp@bangor.ac.uk">cnm20xjp@bangor.ac.uk</a>
+          </p>
+        </div>
+      </div>
+      <!-- end secretary -->
+      <!-- Kit Secretary -->
+      <div class="card card-info">
+        <div class="card-image">
+          <img src="https://nusdigital.s3.amazonaws.com/image/images/359582/original/patrick.jpeg" />
+          <span class="card-title">Kit Secretary</span>
+        </div>
+        <div class="card-content">
+          <p>Patrick Surguy <br />
+            <a href="mailto:pts20pqf@bangor.ac.uk">pts20pqf@bangor.ac.uk</a>
+          </p>
+        </div>
+      </div>
+      <!-- end  kit secretary -->
+      <!-- Trips -->
+      <div class="card card-info">
+        <div class="card-image">
+          <img src="https://nusdigital.s3.amazonaws.com/image/images/359583/original/chris.jpeg" />
+          <span class="card-title">Trips and Away</span>
+        </div>
+        <div class="card-content">
+          <p>Chris Wilden <br />
+            <a href="mailto:chw18rpb@bangor.ac.uk">chw18rpb@bangor.ac.uk</a>
+          </p>
+        </div>
+      </div>
+      <!-- end trips -->
+      <!-- Social -->
+      <div class="card card-info">
+        <div class="card-image">
+          <img src="https://nusdigital.s3.amazonaws.com/image/images/359586/original/lucy.jpeg" />
+          <span class="card-title">Social Secretary</span>
+        </div>
+        <div class="card-content">
+          <p>Lucy Tatam <br />
+            <a href="mailto:lct20pcg@bangor.ac.uk">lct20pcg@bangor.ac.uk</a>
+          </p>
+        </div>
+      </div>
+      <!-- end social -->
+      <!-- Fresher -->
+      <div class="card card-info">
+        <div class="card-image">
+          <img src="https://nusdigital.s3.amazonaws.com/image/images/382028/original/251723177_607205376996641_2150704493600602726_n.jpeg" />
+          <span class="card-title">Fresher Rep</span>
+        </div>
+        <div class="card-content">
+          <p>Laura Walker <br />
+            <a href="mailto:lrw21blp@bangor.ac.uk">lrw21blp@bangor.ac.uk</a>
+          </p>
+        </div>
+      </div>
+      <!-- end Fresher -->
+    </div>
+  </div>
+</section>
+<!-- -->
+<!-- Everything here is talking about the club -->
+<section class="about-container">
+  <div class="text-container">
+    <span class="card-header-text">TRAINING</span>
+  </div>
+  <div class="container">
+    <div style="display:flex;flex-direction:row;flex-flow:wrap;justify-content:center;">
+      <div class="card-flat-half">
+        <p style="text-align: right;">We run training sessions for canoe and canoe polo on a Monday night at the Bangor pool at 8pm, as well as regular river trips to some of the best rivers north wales has to offer. <br />
+          <br /> Whether you like playboating, slalom, river running, or just fancy a relaxing paddle through the beautiful welsh countryside, we do that! <br />
+          <br /> Our canoe polo club also takes part in competitions, so if you fancy having a go at this sport, we would love to have you on the training sessions, straight after canoe on a monday night, at 9pm.
+        </p>
+      </div>
+      <!-- a bit of cheating here to resize the image, make sure this text reflects the text in the description column after it! -->
+      <div class="card-flat-half" style="background-image: url(https://i.pinimg.com/originals/11/fe/7a/11fe7ac1080d45480382f5f1707da7e4.jpg); background-position: center; background-size: cover;min-height:300px;">
+        <p style="color: rgba(0,0,0,0);">We run training sessions for canoe and canoe polo on a Monday night at the Bangor pool at 8pm, as well as regular river trips to some of the best rivers North Wales has to offer. <br />
+          <br /> Whether you like playboating, slalom, river running, or just fancy a relaxing paddle through the beautiful Welsh countryside, we do that! <br />
+          <br /> Our canoe polo club also takes part in competitions, so if you fancy having a go at this sport, we would love to have you on the training sessions, straight after canoe on a Monday night, at 9pm.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- -->
+<!-- igonre the class name,I didnt want to make a new one for this section, this is for social media links -->
+<!-- -->
+<section class="committee-container">
+  <div class="text-container">
+    <span class="card-header-text">SOCIAL</span>
+  </div>
+  <!-- If new social media links are needed,add new 'a' elements using the templates below within this div, they will automatically position themselves -->
+  <p style="text-align: center;">Contact us, view our adventures and get to know the club by following our social media!</p> &nbsp; <div class="container" style="display:flex;">
+    <a class="button flat footer-links dark footer-text-copyright" href="https://www.instagram.com/bangorunicanoeclub/" target="_top">
+      <i class="fab fa-instagram center-icon"></i>
+    </a>
+    <a class="button flat footer-links dark footer-text-copyright" href="https://www.facebook.com/groups/bangorcanoe" target="_top">
+      <i class="fab fa-facebook center-icon"></i>
+    </a>
+  </div>
+</section>
+<!-- -->
+<!-- Sponsors -->
+<!-- -->
+<section class="about-container">
+  <div class="text-container">
+    <span class="card-header-text">OUR SPONSORS</span>
+  </div>
+  <p style="text-align: center;">We are proud to be sponsored by local businesses, check them out with the links below!</p>
+  <div class="container">
+    <!-- one card for each sponsor -->
+    <div style="display:flex;flex-direction:row;flex-flow:wrap;justify-content:center;">
+      <!-- radical rider -->
+      <div class="card card-info" onclick="window.location.href='https://radicalrider.co.uk/'" style="cursor: grab;">
+        <div class="card-image" style="height:200px; background-color: black;">
+          <img src="https://cdn.shopify.com/s/files/1/0246/8305/3133/files/radical_rider_kayak_shop_-_Copy_285x.png" style="top: 80px; padding:10px;" />
+          <span class="card-title">RADICAL RIDER</span>
+        </div>
+        <div class="card-content">
+          <p>
+            <br /> Run by one of the old club members, and a new sponsor for this year, Radical Rider is a well known kayaking shop established at Canolfan Tryweryn. Club members can get competitive discounts, and the owner even likes to come and say hello from time to time!
+          </p>
+        </div>
+      </div>
+      <!-- castle -->
+      <div class="card card-info" onclick="window.location.href='https://www.greatukpubs.co.uk/thecastlebangor'" style="cursor: grab;">
+        <div class="card-image">
+          <img src="https://scontent.fman4-1.fna.fbcdn.net/v/t1.6435-9/242317581_4523703131029953_8546691000675688111_n.png?_nc_cat=107&amp;ccb=1-5&amp;_nc_sid=09cbfe&amp;_nc_ohc=UVpPsgM5UDUAX-J_nno&amp;_nc_ht=scontent.fman4-1.fna&amp;oh=799d5c0084c70c74160efa147a82fffb&amp;oe=61AAC899" style="padding:10px 0px 0px 10px;" />
+          <span class="card-title"></span>
+        </div>
+        <div class="card-content">
+          <p>
+            <br /> The Castle has been our primary sponsor for many years. Its a lovely pub in the centre of Bangor, where we run a lot of our socials.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<p>&nbsp;</p>
+<div style="width:100%;justify-content:center;">
+  <!-- dont change this, I did design the original thing -->
+  <p style="text-align: center;">Sub-Site designed by Lewis Dixon</p>
+</div>
